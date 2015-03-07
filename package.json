@@ -1,0 +1,20 @@
+{
+  "name": "react_stories",
+  "version": "0.0.0",
+  "description": "Just a training app in react",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "http-server dist --silent -p 2000",
+    "watch": "npm start & watchify . -o dist/app.js --verbose --debug --extension .jsx"
+  },
+  "author": "Emilia Andrzejewska",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "http-server": "~0.7.5",
+    "browserify": "~9.0.3",
+    "watchify": "~2.4.0"
+  },
+  "dependencies": {
+    "http-server": "~0.7.5"
+  }
+}
