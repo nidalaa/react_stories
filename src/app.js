@@ -2,7 +2,7 @@
 
 global.jQuery = require('jquery');
 global.$ = require('jquery');
-var React = require('react');
+
 var Badge = require('react-bootstrap/lib/Badge');
 var Navbar = require('react-bootstrap/lib/Navbar');
 var Nav = require('react-bootstrap/lib/Nav');
@@ -10,6 +10,13 @@ var NavItem = require('react-bootstrap/lib/NavItem');
 var ListGroup = require('react-bootstrap/lib/ListGroup');
 var ListGroupItem = require('react-bootstrap/lib/ListGroupItem');
 var PageHeader = require('react-bootstrap/lib/PageHeader');
+
+var React = require('react');
+var Router = require('react-router');
+var DefaultRoute = Router.DefaultRoute;
+var Route = Router.Route;
+var RouteHandler = Router.RouteHandler;
+var Link = Router.Link;
 
 
 var Story = React.createClass({
@@ -26,6 +33,7 @@ var Story = React.createClass({
 
 var StoriesCollection = React.createClass({
   render: function() {
+
     var storiesNodes = this.props.storiesData.map(function(story){
       return (
         <ListGroupItem>
@@ -43,26 +51,9 @@ var StoriesCollection = React.createClass({
 });
 
 
-var StoriesMenu = React.createClass({
-  render: function(){
-    return(
-      <div>
-      <Navbar brand="React Stories">
-        <Nav>
-          <NavItem eventKey={1} href="#">Popular</NavItem>
-          <NavItem eventKey={2} href="#">Recent</NavItem>
-        </Nav>
-      </Navbar>
-      </div>
-    );
-  }
-});
-
-
-
 var StoriesBox = React.createClass({
   getInitialState: function(){
-    return {storiesData: [{"id": 1, "title": "Title", "url": "url", "score": "+2000"}]}
+    return {storiesData: []}
   },
 
   componentDidMount: function(){
@@ -84,20 +75,69 @@ var StoriesBox = React.createClass({
     };
 
     return(
-      <div>
-        <StoriesMenu/>
-
-        <div style={wrapperStyle}>
-          <PageHeader>The newest amazing stories for you! See them all!</PageHeader>
-          <StoriesCollection storiesData={this.state.storiesData}/>
-        </div>
+      <div style={wrapperStyle}>
+        <PageHeader>The newest amazing stories for you! See them all!</PageHeader>
+        <StoriesCollection storiesData={this.state.storiesData}/>
       </div>
     );
   }
 });
 
-document.addEventListener("DOMContentLoaded", function(){
-  React.render(<StoriesBox apiUrl="https://fierce-gorge-1132.herokuapp.com/stories" />, document.getElementById("content"));
+var RecentStories = React.createClass({
+  render: function() {
+    return(
+      <StoriesBox apiUrl="https://fierce-gorge-1132.herokuapp.com/stories/recent"/>
+    );
+  }
 });
 
+var PopularStories = React.createClass({
+  render: function() {
+    return(
+      <StoriesBox apiUrl="https://fierce-gorge-1132.herokuapp.com/stories"/>
+    );
+  }
+});
+
+
+var App = React.createClass({
+
+  mixins: [ Router.State ],
+
+  render: function() {
+    var activeItem = {
+      'font-weight': 'bold'
+    };
+
+    return(
+      <div>
+        <Navbar brand="React Stories">
+          <Nav>
+            <NavItem><Link to="popular" style={this.isActive("popular", null, null) ? activeItem : null}>Popular</Link></NavItem>
+            <NavItem><Link to="recent" style={this.isActive("recent", null, null) ? activeItem : null}>Recent</Link></NavItem>
+          </Nav>
+        </Navbar>
+
+        <RouteHandler/>
+      </div>
+    );
+  }
+});
+
+
+
+
+var routes = (
+  <Route name="app" path="/" handler={App}>
+    <Route name="popular" path="popular" handler={PopularStories}/>
+    <Route name="recent" path="recent" handler={RecentStories}/>
+    <DefaultRoute handler={PopularStories}/>
+  </Route>
+);
+
+document.addEventListener("DOMContentLoaded", function(){
+  Router.run(routes, function (Handler) {
+    React.render(<Handler/>, document.getElementById("content"));
+  });
+});
 
