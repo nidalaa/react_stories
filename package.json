@@ -19,15 +19,7 @@
     ]
   },
   "devDependencies": {
-    "http-server": "~0.7.5",
-    "browserify": "~9.0.3",
-    "watchify": "~2.4.0",
-    "react": "~0.12.2",
-    "reactify": "~1.0.0",
-    "jquery": "~2.1.3",
-    "react-bootstrap": "~0.16.1",
-    "bootstrap": "~3.3.2",
-    "react-router": "~0.12.4"
+    "watchify": "~2.4.0"
   },
   "dependencies": {
     "http-server": "~0.7.5",
