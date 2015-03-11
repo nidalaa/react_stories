@@ -5,7 +5,7 @@ global.$ = require('jquery');
 
 var React = require('react');
 var Router = require('react-router');
-var DefaultRoute = Router.DefaultRoute;
+var Redirect = Router.Redirect;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 
@@ -28,7 +28,7 @@ var routes = (
   <Route name="app" path="/" handler={App}>
     <Route name="popular" path="popular" handler={PopularStories}/>
     <Route name="recent" path="recent" handler={RecentStories}/>
-    <DefaultRoute handler={PopularStories}/>
+    <Redirect from="/" to="popular" />
   </Route>
 );
 
