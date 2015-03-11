@@ -1,4 +1,4 @@
 dist/*
 !dist/index.html
-!dist/styles.css
+.sass-cache
 node_modules
