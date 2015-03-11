@@ -23,13 +23,8 @@ module.exports = React.createClass({
   },
 
   render: function(){
-    var wrapperStyle = {
-      width: '1100px',
-      margin: 'auto'
-    };
-
     return(
-      <div style={wrapperStyle}>
+      <div className='wrapper'>
         <PageHeader>The newest amazing stories for you! See them all!</PageHeader>
         <StoriesCollection storiesData={this.state.storiesData}/>
       </div>
