@@ -12,7 +12,7 @@ module.exports = React.createClass({
     var storiesNodes = this.props.storiesData.map(function(story){
       return (
         <ListGroupItem>
-          <Story id={story.id} title={story.title} url={story.url} score={story.score}/>
+          <Story {...story}/>
         </ListGroupItem>
       );
     });

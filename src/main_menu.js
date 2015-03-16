@@ -19,8 +19,8 @@ module.exports = React.createClass({
     return(
       <Navbar brand="React Stories">
         <Nav>
-          <NavItem><Link to="popular" style={this.isActive("popular", null, null) ? activeItem : null}>Popular</Link></NavItem>
-          <NavItem><Link to="recent" style={this.isActive("recent", null, null) ? activeItem : null}>Recent</Link></NavItem>
+          <NavItem><Link to="popular" activeStyle={activeItem}>Popular</Link></NavItem>
+          <NavItem><Link to="recent" activeStyle={activeItem}>Recent</Link></NavItem>
         </Nav>
       </Navbar>
     );
