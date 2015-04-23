@@ -12,7 +12,7 @@ module.exports = React.createClass({
 
   componentDidMount: function(){
     $.ajax({
-      url: this.props.apiUrl,
+      url: "https://fierce-gorge-1132.herokuapp.com/stories" +this.props.path,
       dataType: 'json',
       success: function(data) {
         if (this.isMounted()) {

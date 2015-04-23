@@ -13,7 +13,7 @@ module.exports = React.createClass({
 
   render: function() {
     var activeItem = {
-      'font-weight': 'bold'
+      'fontWeight': 'bold'
     };
 
     return(
