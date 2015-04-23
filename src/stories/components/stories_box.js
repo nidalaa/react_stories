@@ -11,7 +11,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function(){
-    $.ajax({
+    jQuery.ajax({
       url: "https://fierce-gorge-1132.herokuapp.com/stories" +this.props.path,
       dataType: 'json',
       success: function(data) {

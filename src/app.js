@@ -1,7 +1,6 @@
 "use strict";
 
 global.jQuery = require('jquery');
-global.$ = require('jquery');
 
 var React = require('react');
 var Router = require('react-router');
