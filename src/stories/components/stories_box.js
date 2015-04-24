@@ -1,5 +1,7 @@
 "use strict";
 
+require('es6-promise').polyfill();
+
 var React = require('react');
 var PageHeader = require('react-bootstrap').PageHeader;
 
@@ -11,15 +13,20 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function(){
-    jQuery.ajax({
-      url: "https://fierce-gorge-1132.herokuapp.com/stories" +this.props.path,
-      dataType: 'json',
-      success: function(data) {
-        if (this.isMounted()) {
-          this.setState({storiesData: data});
+  var _this = this;
+
+    fetch("https://fierce-gorge-1132.herokuapp.com/stories" + this.props.path, {mode: 'cors'})
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(json) {
+        if (_this.isMounted()) {
+          _this.setState({storiesData: json});
         }
-      }.bind(this)
-    });
+      })
+      .then(undefined, function(error) {
+        alert("Error during fetching stories. Try to refresh page, please.")
+      });
   },
 
   render: function(){

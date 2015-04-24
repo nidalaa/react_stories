@@ -1,7 +1,5 @@
 "use strict";
 
-global.jQuery = require('jquery');
-
 var React = require('react');
 var Router = require('react-router');
 var Redirect = Router.Redirect;
