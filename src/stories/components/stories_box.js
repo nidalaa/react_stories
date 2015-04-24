@@ -13,17 +13,15 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function(){
-  var _this = this;
-
     fetch("https://fierce-gorge-1132.herokuapp.com/stories" + this.props.path, {mode: 'cors'})
       .then(function(response) {
         return response.json();
       })
       .then(function(json) {
-        if (_this.isMounted()) {
-          _this.setState({storiesData: json});
+        if (this.isMounted()) {
+          this.setState({storiesData: json});
         }
-      })
+      }.bind(this))
       .then(undefined, function(error) {
         alert("Error during fetching stories. Try to refresh page, please.")
       });
